@@ -67,52 +67,131 @@ describe('my website should always look the same', function(){
   });
 });
 
-var assert = require();
-var client = require().remote();
-require().init();
+var assert = require('assert');
+var client = require('webdriverio').remote({
+  desiredCapabilities: {
+    browserName: 'chrome'
+  }
+});
+require('webdrivercss').init(client, {
+  key: '<your personal API key>'
+});
 client
   .init()
-  .url()
-  .webdrivercss()
+  .url('http://example.com')
+  .webdrivercss('<app name>', {
+    name: '<test name>',
+    elem: '#someElement'
+  }, function(err, res) {
+    asset.ifError(err);
+    asset.equal(res.steps, res.strictMatches)
+  })
   .end();
+  
+clinet
+  .url('http://github.com')
+  .webdrivercss('githubform', {
+    name: 'github-signup',
+    elem: '#site-container > div.marketing-section.marketing-section-signup > div.container > form'
+  });
 
 client
-  .url()
-  .webdrivercss();
+  .url('http://github.com/')
+  .webdrivercss('headerbar', {
+    name: 'headerbar',
+    x: 110,
+    y: 15,
+    width: 980,
+    height: 34,
+    screenWidth: [1200]
+  });
   
 client
-  .url()
-  .webdrivercss();
+  .url('http://tumblr.com/themes')
+  .webdrivercss('tumblrpage', {
+    name: 'startpage',
+    exclude: ['#theme_garden > div > section.carousel > div.carousel_slides',
+              '//*[@id="theme_garden"]/div/section[3]',
+              '//*[@id="theme_garden"]/div/section[4]']
+    screenWidth: [1200]
+  });
   
 client
-  .url()
-  .webdrivercss();
+  .url('http://tumblr.com/themes')
+  .webdrivercss('tumblrpage', {
+    name: 'startpage',
+    exclude: [{
+      x0: 100, y0: 100,
+      x1: 300, y1: 200
+    }],
+    screenWidth: [1200]
+  });
   
 client
-  .url()
-  .webdrivercss();
+  .url('http://tumblr.com/themes')
+  .webdrivercss('polygon', {
+    name: startpage,
+    exclude: [{
+      x0: 120, y0: 725,
+      x1: 120, y1: 600,
+      x2: 290, y2: 490,
+      x3: 290, y3: 255,
+      x4: 925, y4: 255,
+      x4: 925, y5: 490,
+      x6: 1080,y6: 600,
+      x7: 1080,y7: 725
+    }],
+    screenWidth: [1200]
+  });
   
 client
-  .url ()
-  .webdrivercss();
+  .url('http://tumblr.com/themes')
+  .webdrivercss('tumblrpage', {
+    name: 'startpage',
+    ignore: 'antialiasing',
+    screenWidth: [1200]
+  });
   
 client
-  .url()
-  .webdrivercss();
-  
-client
-  .url()
-  .webdrivercss();
+  .url('http://stephencaver.com/')
+  .webdrivercss('startpage', {
+    name: 'header',
+    elem: '#masthed',
+    screenWidth: [320,640, 960]
+  });
 
-it();
-it();
+it('',function(done){
+  client
+    .init()
+    .url('https://example.com')
+    .webdrivercss('page1', [
+      {
+        name: 'test',
+        screenWidth: [320,480, 640, 1024]
+      },
+    ])
+    .end()
+    .call(done);
+});
+it('should check the second page',function(done){
+  client
+    .webdrivercss('page2', [
+    ])
+});
 
-var client = require().remote();
-require().init();
+var client = require('webdriverio').remote({
+  desiredCapabilities: {
+    browserName: 'phantomjs'
+  }
+});
+require('webdrivercss').init(client, {
+  screensshotRoot: 'myRegressionTests',
+  api: 'http://example.com/api/webdrivercss'
+});
 client
   .init()
   .sync()
-  .url()
+  .url('http://example.com')
   .sync()
   .end();
 ```
